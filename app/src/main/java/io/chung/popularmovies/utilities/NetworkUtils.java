@@ -25,7 +25,7 @@ public final class NetworkUtils {
 
     private static final String THEMOVIEDB_POSTER_BASE_URL = "http://image.tmdb.org/t/p/";
 
-    private static final String THEMOVIEDB_POSTER_SIZE = "w185";
+    private static final String THEMOVIEDB_POSTER_SIZE = "w780";
 
     /**
      * Sort criteria used when requesting movie list.
