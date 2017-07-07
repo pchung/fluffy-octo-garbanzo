@@ -20,8 +20,9 @@ public final class NetworkUtils {
 
     private static final String POPULAR_PATH = "popular";
     private static final String TOP_RATED_PATH = "top_rated";
-    private static final String REVIEWS_PATH = "reviews";
-    private static final String VIDEOS_PATH = "videos";
+
+    private static final String APPEND_TO_RESPONSE_QUERY = "append_to_response";
+    private static final String APPEND_TO_RESULT_SUB_REQUESTS = "videos,reviews";
 
     private static final String THEMOVIEDB_POSTER_BASE_URL = "http://image.tmdb.org/t/p/";
 
@@ -92,37 +93,20 @@ public final class NetworkUtils {
     }
 
     /**
-     * Builds a URL to get a list of reviews of the given movieId.
+     * Builds a URL to simultaneously get movie details, videos and reviews for a movie ID.
      *
-     * @param movieId The Movie DB's movie ID used to get a review list.
-     * @return The Movie DB URL used for requesting a review list.
+     * @param movieId The Movie DB's movie ID used to get information.
+     * @return The Movie DB URL used for requesting information about the given movie ID.
      */
-    public static URL buildReviewsListUrl(String movieId) {
+    public static URL buildMovieDetailsUrl(String movieId, String apiKey) {
         Uri uri = Uri.parse(THEMOVIEDB_BASE_URL).buildUpon()
                 .appendPath(movieId)
-                .appendPath(REVIEWS_PATH)
+                .appendQueryParameter(API_KEY_PARAM, apiKey)
+                .appendQueryParameter(APPEND_TO_RESPONSE_QUERY, APPEND_TO_RESULT_SUB_REQUESTS)
                 .build();
 
         URL url = uriToUrl(uri);
-        Log.v(TAG, "Review list URL for " + movieId + " built: " + url);
-
-        return url;
-    }
-
-    /**
-     * Builds a URL to get a list of videos of the given movieId.
-     *
-     * @param movieId The Movie DB's movie ID used to get a video list.
-     * @return The Movie DB URL used for requesting a video list.
-     */
-    public static URL buildVideoListUrl(String movieId) {
-        Uri uri = Uri.parse(THEMOVIEDB_BASE_URL).buildUpon()
-                .appendPath(movieId)
-                .appendPath(VIDEOS_PATH)
-                .build();
-
-        URL url = uriToUrl(uri);
-        Log.v(TAG, "Video list URL for " + movieId + " built: " + url);
+        Log.v(TAG, "Movie info URL for " + movieId + " built: " + url);
 
         return url;
     }
