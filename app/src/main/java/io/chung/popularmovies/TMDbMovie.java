@@ -22,6 +22,7 @@ public class TMDbMovie {
     public final String title;
     public final String releaseDate;
     public final Review[] reviews;
+    public final int runtime;
     public final boolean video;
     public final Video[] videos;
     public final double voteAverage;
@@ -45,6 +46,7 @@ public class TMDbMovie {
         final String RELEASE_DATE_KEY = "release_date";
         final String RESULTS_KEY = "results";
         final String REVIEWS_KEY = "reviews";
+        final String RUNTIME_KEY = "runtime";
         final String VIDEO_KEY = "video";
         final String VIDEOS_KEY = "videos";
         final String VOTE_AVERAGE_KEY = "vote_average";
@@ -60,6 +62,7 @@ public class TMDbMovie {
         posterPath = movieJson.optString(POSTER_PATH_KEY);
         title = movieJson.optString(TITLE_KEY);
         releaseDate = movieJson.optString(RELEASE_DATE_KEY);
+        runtime = movieJson.optInt(RUNTIME_KEY);
         video = movieJson.optBoolean(VIDEO_KEY);
         voteAverage = movieJson.optDouble(VOTE_AVERAGE_KEY);
         voteCount = movieJson.optInt(VOTE_COUNT_KEY);
