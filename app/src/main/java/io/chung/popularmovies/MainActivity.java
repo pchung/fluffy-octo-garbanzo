@@ -1,5 +1,7 @@
 package io.chung.popularmovies;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.URL;
 
+import io.chung.popularmovies.constants.IntentExtraKeys;
 import io.chung.popularmovies.utilities.NetworkUtils;
 import io.chung.popularmovies.utilities.TMDbUtils;
 
@@ -28,7 +31,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListItemClick(TMDbMovie movie) {
-        Toast.makeText(this, movie.title, Toast.LENGTH_LONG).show();
+        Context context = this;
+        Class destClass = MovieDetailActivity.class;
+
+        Intent intent = new Intent(context, destClass);
+        intent.putExtra(IntentExtraKeys.MOVIE_ID, movie.id);
+
+        startActivity(intent);
     }
 
     @Override

@@ -28,6 +28,9 @@ public final class NetworkUtils {
 
     private static final String THEMOVIEDB_POSTER_SIZE = "w780";
 
+    private static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch";
+    private static final String YOUTUBE_VIDEO_PARAM = "v";
+
     /**
      * Sort criteria used when requesting movie list.
      */
@@ -98,15 +101,31 @@ public final class NetworkUtils {
      * @param movieId The Movie DB's movie ID used to get information.
      * @return The Movie DB URL used for requesting information about the given movie ID.
      */
-    public static URL buildMovieDetailsUrl(String movieId, String apiKey) {
+    public static URL buildMovieDetailsUrl(int movieId, String apiKey) {
         Uri uri = Uri.parse(THEMOVIEDB_BASE_URL).buildUpon()
-                .appendPath(movieId)
+                .appendPath(String.valueOf(movieId))
                 .appendQueryParameter(API_KEY_PARAM, apiKey)
                 .appendQueryParameter(APPEND_TO_RESPONSE_QUERY, APPEND_TO_RESULT_SUB_REQUESTS)
                 .build();
 
         URL url = uriToUrl(uri);
         Log.v(TAG, "Movie info URL for " + movieId + " built: " + url);
+
+        return url;
+    }
+
+    /**
+     * Builds a YouTube URL for the given video ID.
+     * @param videoId ID of the YouTube video.
+     * @return The YouTube URL for the given video ID.
+     */
+    public static URL buildYoutubeUrl(String videoId) {
+        Uri uri = Uri.parse(YOUTUBE_BASE_URL).buildUpon()
+                .appendQueryParameter(YOUTUBE_VIDEO_PARAM, videoId)
+                .build();
+
+        URL url = uriToUrl(uri);
+        Log.v(TAG, "YouTube URL built: " + url);
 
         return url;
     }
