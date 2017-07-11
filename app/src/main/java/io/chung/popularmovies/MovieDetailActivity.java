@@ -1,11 +1,14 @@
 package io.chung.popularmovies;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
@@ -18,14 +21,24 @@ import io.chung.popularmovies.utilities.TMDbUtils;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    private TextView mDetails;
+    private TextView mTitle;
+    private ImageView mPoster;
+    private TextView mReleaseYear;
+    private TextView mRuntime;
+    private TextView mVoteAverage;
+    private TextView mOverview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        mDetails = (TextView) findViewById(R.id.tv_movie_details);
+        mTitle = (TextView) findViewById(R.id.tv_movie_title);
+        mPoster = (ImageView) findViewById(R.id.iv_movie_poster_details);
+        mReleaseYear = (TextView) findViewById(R.id.tv_release_year);
+        mRuntime = (TextView) findViewById(R.id.tv_runtime);
+        mVoteAverage = (TextView) findViewById(R.id.tv_vote_average);
+        mOverview = (TextView) findViewById(R.id.tv_overview);
 
         Intent incomingIntent = getIntent();
 
@@ -78,11 +91,25 @@ public class MovieDetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(TMDbMovie movie) {
             if (movie != null) {
-                String detailsText = "Title: " + movie.title + "\nRelease Date: " + movie.releaseDate +
-                        "\nPoster URL: " + movie.posterPath + "\nVote Average: " + movie.voteAverage +
-                        "\nSynopsis: " + movie.overview;
+                // Use Picasso to load the poster image.
+                Uri posterUri = NetworkUtils.buildPosterUri(movie.posterPath);
+                Picasso.with(mPoster.getContext()).load(posterUri).into(mPoster);
 
-                mDetails.setText(detailsText);
+                // Year needs to be extracted from the string.
+                String year = movie.releaseDate.split("-")[0];
+                mReleaseYear.setText(year);
+
+                // Append "min" to runtime
+                String runtime = Integer.toString(movie.runtime) + "min";
+                mRuntime.setText(runtime);
+
+                // Add denominator for voteAverage
+                String voteAverage = Double.toString(movie.voteAverage) + "/10";
+                mVoteAverage.setText(voteAverage);
+
+                // Title and overview are fine by themselves
+                mTitle.setText(movie.title);
+                mOverview.setText(movie.overview);
             }
         }
     }
