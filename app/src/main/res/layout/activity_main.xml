@@ -6,6 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="io.chung.popularmovies.MainActivity">
 
+    <!--TODO: Can android:numColumns="autofit" work better?-->
+    <!--https://stackoverflow.com/questions/29579811/changing-number-of-columns-with-gridlayoutmanager-and-recyclerview-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_movie_list"
         android:layout_width="match_parent"
