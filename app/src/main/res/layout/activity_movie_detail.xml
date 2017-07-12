@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="io.chung.popularmovies.MovieDetailActivity">
 
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Movie Title"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:paddingBottom="32dp"
+            android:paddingTop="32dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_movie_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:textSize="32dp"
-                android:textColor="#FFFFFF"
-                android:paddingBottom="32dp"
-                android:paddingTop="32dp"
-                android:paddingLeft="16dp" />
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_movie_poster_details"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="0"
+                    android:layout_width="192dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:scaleType="centerInside" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/iv_movie_poster_details"
-                        android:adjustViewBounds="true"
-                        android:layout_weight="0"
-                        android:layout_width="192dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="16dp"
-                        android:paddingRight="16dp"
-                        android:scaleType="centerInside"/>
-
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:orientation="vertical"
+                    <TextView
+                        android:id="@+id/tv_release_year"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:text="2017"
+                        android:textSize="24sp" />
 
-                        <TextView
-                            android:id="@+id/tv_release_year"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="24dp" />
+                    <TextView
+                        android:id="@+id/tv_runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123min"
+                        android:textSize="16sp"
+                        android:textStyle="italic" />
 
-                        <TextView
-                            android:id="@+id/tv_runtime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16dp"
-                            android:textStyle="italic" />
-
-                        <TextView
-                            android:id="@+id/tv_vote_average"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_vote_average"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6.2/10" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_overview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit finibus ligula eu posuere. Ut vel tortor eget lectus placerat vestibulum vitae vitae arcu. Curabitur malesuada justo eget ex tincidunt facilisis. Nam eu porttitor ipsum. In a massa lobortis, porttitor lacus a, mollis enim. Sed sit amet volutpat augue, eleifend egestas tellus. Maecenas nisi massa, auctor ac gravida et, auctor et augue. Duis faucibus sapien dui, ut commodo metus vulputate vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ligula nec ligula convallis, a ultrices leo ultricies. Nullam urna velit, vestibulum eget orci at, aliquet ornare velit. Suspendisse potenti. Morbi at pharetra diam, ac gravida ipsum." />
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
