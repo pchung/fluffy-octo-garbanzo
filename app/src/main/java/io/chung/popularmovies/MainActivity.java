@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity
 
         // TODO: Progress bar for when fetching data
         loadMovieData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
     }
 
     private void loadMovieData() {
