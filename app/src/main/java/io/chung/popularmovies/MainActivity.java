@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -63,8 +64,7 @@ public class MainActivity extends AppCompatActivity
         mMovieItemAdapter = new MovieItemAdapter(this);
         mMovieList.setAdapter(mMovieItemAdapter);
 
-        // TODO: Progress bar for when fetching data
-        loadMovieData();
+        loadMovieData(NetworkUtils.SortCriteria.POPULAR);
     }
 
     @Override
@@ -74,13 +74,30 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void loadMovieData() {
-        // TODO: Add logic for showing the view with the error message
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort_popular:
+                setTitle(R.string.title_popular);
+                item.setChecked(true);
+                loadMovieData(NetworkUtils.SortCriteria.POPULAR);
+                return true;
+            case R.id.action_sort_top_rated:
+                setTitle(R.string.title_top_rated);
+                item.setChecked(true);
+                loadMovieData(NetworkUtils.SortCriteria.TOP_RATED);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-        // TODO: Add menu option for sorting (Popular vs. Highest Rated vs. Favorites)
-
-        // TODO: Create AsyncTask for fetching data
-        new FetchMovieListTask().execute(NetworkUtils.SortCriteria.POPULAR);  // TODO: Hard-coded for now.
+    /**
+     * Executes an asynchronous request for the movie list.
+     * @param sortCriteria Indicates which sorting of the movie list to be requested.
+     */
+    private void loadMovieData(NetworkUtils.SortCriteria sortCriteria) {
+        new FetchMovieListTask().execute(sortCriteria);
     }
 
     private class FetchMovieListTask extends AsyncTask<NetworkUtils.SortCriteria, Void, TMDbMovie[]> {

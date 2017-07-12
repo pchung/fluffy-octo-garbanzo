@@ -3,4 +3,6 @@
     <string name="menu_sort">Sort</string>
     <string name="menu_sort_popular">Popular</string>
     <string name="menu_sort_top_rated">Top Rated</string>
+    <string name="title_popular">Popular Movies</string>
+    <string name="title_top_rated">Top Rated Movies</string>
 </resources>
