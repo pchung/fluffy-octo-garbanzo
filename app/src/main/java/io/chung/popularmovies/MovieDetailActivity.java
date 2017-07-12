@@ -3,8 +3,10 @@ package io.chung.popularmovies;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +35,14 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        // Show the up button in the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        // Get references to all views in layout
         mTitle = (TextView) findViewById(R.id.tv_movie_title);
         mPoster = (ImageView) findViewById(R.id.iv_movie_poster_details);
         mReleaseYear = (TextView) findViewById(R.id.tv_release_year);
@@ -40,6 +50,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         mVoteAverage = (TextView) findViewById(R.id.tv_vote_average);
         mOverview = (TextView) findViewById(R.id.tv_overview);
 
+        // Process the incoming intent
         Intent incomingIntent = getIntent();
 
         if (incomingIntent != null) {
@@ -50,6 +61,17 @@ public class MovieDetailActivity extends AppCompatActivity {
                     getMovieInfo(movieId);
                 }
             }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
