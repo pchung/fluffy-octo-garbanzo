@@ -7,11 +7,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.json.JSONException;
 
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity
 
     /* Reference to RecyclerView's adapter. */
     private MovieItemAdapter mMovieItemAdapter;
+
+    /* Reference to the text view that displays the error message. */
+    private TextView mErrorMessageDisplay;
+
+    /* Reference to the loading indicator. */
+    private ProgressBar mLoadingIndicator;
 
     @Override
     public void onListItemClick(TMDbMovie movie) {
@@ -56,11 +63,15 @@ public class MainActivity extends AppCompatActivity
             layoutManager = new GridLayoutManager(this, 3);
         }
 
+        // Initialize references to the views
         mMovieList = (RecyclerView) findViewById(R.id.rv_movie_list);
+        mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message);
+        mLoadingIndicator = (ProgressBar) findViewById(R.id.pg_loading_indicator);
+
+        // Initialize movie list
         mMovieList.setLayoutManager(layoutManager);
         mMovieList.setHasFixedSize(true);
 
-        // TODO: Figure out what to pass to the adapter
         mMovieItemAdapter = new MovieItemAdapter(this);
         mMovieList.setAdapter(mMovieItemAdapter);
 
@@ -100,12 +111,27 @@ public class MainActivity extends AppCompatActivity
         new FetchMovieListTask().execute(sortCriteria);
     }
 
+    /**
+     * Shows the movie list and hides and error message text view.
+     */
+    private void showMovieList() {
+        mErrorMessageDisplay.setVisibility(View.INVISIBLE);
+        mMovieList.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Shows the error message text view and hids the movie list.
+     */
+    private void showErrorMessage() {
+        mErrorMessageDisplay.setVisibility(View.VISIBLE);
+        mMovieList.setVisibility(View.INVISIBLE);
+    }
+
     private class FetchMovieListTask extends AsyncTask<NetworkUtils.SortCriteria, Void, TMDbMovie[]> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            // TODO: Show loading indicator
+            mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -134,9 +160,13 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(TMDbMovie[] movies) {
-            if (movies != null) {
-                // TODO: Show the recyclerview and hide error
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+
+            if (movies != null && movies.length != 0) {
+                showMovieList();
                 mMovieItemAdapter.setMovieData(movies);
+            } else {
+                showErrorMessage();
             }
         }
     }
