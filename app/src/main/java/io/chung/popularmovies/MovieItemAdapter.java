@@ -42,12 +42,10 @@ public class MovieItemAdapter extends RecyclerView.Adapter<MovieItemAdapter.Post
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.movie_item;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
 
-        View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
-        PosterViewHolder viewHolder = new PosterViewHolder(view);
+        View view = inflater.inflate(layoutIdForListItem, parent, false);
 
-        return viewHolder;
+        return new PosterViewHolder(view);
     }
 
     @Override
@@ -72,7 +70,7 @@ public class MovieItemAdapter extends RecyclerView.Adapter<MovieItemAdapter.Post
 
     public class PosterViewHolder extends RecyclerView.ViewHolder implements
             View.OnClickListener {
-        ImageView mMoviePoster;
+        public final ImageView mMoviePoster;
 
         public PosterViewHolder(View itemView) {
             super(itemView);

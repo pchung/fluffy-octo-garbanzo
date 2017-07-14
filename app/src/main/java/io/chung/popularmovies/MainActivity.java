@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Shows the error message text view and hids the movie list.
+     * Shows the error message text view and hides the movie list.
      */
     private void showErrorMessage() {
         mErrorMessageDisplay.setVisibility(View.VISIBLE);

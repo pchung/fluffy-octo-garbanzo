@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -107,7 +106,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     /**
-     * Shows the error message text view and hids the movie list.
+     * Shows the error message text view and hides the movie list.
      */
     private void showErrorMessage() {
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
