@@ -1,7 +1,5 @@
 package io.chung.popularmovies.utilities;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,26 +16,22 @@ public final class TMDbUtils {
     private static final String TMDB_STATUS_MESSAGE = "status_message";
 
     /**
-     * Checks to see if the response contains an error.
+     * Checks to see if the response contains an error. If an error is
      * @param responseJson JSONObject of the response.
-     * @return Returns true if the response contains an error.
      */
-    private static boolean requestError(JSONObject responseJson)
-            throws JSONException {
+    private static void checkResponseError(JSONObject responseJson)
+            throws JSONException, TMDbException {
 
         // TMDb will return a small JSON with "status_code" and "status_message" keys if the request failed.
         if (responseJson.has(TMDB_STATUS_CODE)) {
-            int errorCode = responseJson.getInt(TMDB_STATUS_CODE);
-            String errorMessage = responseJson.getString(TMDB_STATUS_MESSAGE);
+            final int SUCCESS_STATUS_CODE = 1;
+            int statusCode = responseJson.getInt(TMDB_STATUS_CODE);
+            String statusMessage = responseJson.getString(TMDB_STATUS_MESSAGE);
 
-            Log.e(TAG, "Error (" + errorCode + ") parsing JSON: " + errorMessage);
-            // TODO: Error code handling.
-            // TMDb has there status codes here: https://www.themoviedb.org/documentation/api/status-codes
-            // Figure out what to do if/when an error code occurs.
-
-            return true;
-        } else {
-            return false;
+            if (statusCode != SUCCESS_STATUS_CODE) {
+                String errorMessage = "Error (" + statusCode + "): " + statusMessage;
+                throw new TMDbException(errorMessage);
+            }
         }
     }
 
@@ -48,16 +42,11 @@ public final class TMDbUtils {
      * @throws JSONException Thrown when JSON parsing fails.
      */
     public static TMDbMovie parseMovieDetailsResponse(String response)
-        throws JSONException {
+        throws JSONException, TMDbException {
 
         // Start parsing the given string as a JSON object.
         JSONObject responseJson = new JSONObject(response);
-
-        // Check to see if the response is an error.
-        if (requestError(responseJson)) {
-            // TODO: Do something! Probably better throw an exception here.
-            return null;
-        }
+        checkResponseError(responseJson);
 
         return new TMDbMovie(responseJson);
     }
@@ -70,19 +59,14 @@ public final class TMDbUtils {
      * The order of the the List is in the order of the objects seen in the JSON response.
      */
     public static TMDbMovie[] parseMovieListResponse(String response)
-            throws JSONException {
+            throws JSONException, TMDbException {
 
         /* Key for movie list results. */
         final String TMDB_RESULTS = "results";
 
         // Start parsing the given string as a JSON object.
         JSONObject responseJson = new JSONObject(response);
-
-        // Check to see if the response is an error.
-        if (requestError(responseJson)) {
-            // TODO: Do something! Probably better throw an exception here.
-            return new TMDbMovie[0];
-        }
+        checkResponseError(responseJson);
 
         JSONArray movieResults = responseJson.optJSONArray(TMDB_RESULTS);
         TMDbMovie[] movieList = null;
@@ -100,5 +84,4 @@ public final class TMDbUtils {
 
         return movieList;
     }
-
 }

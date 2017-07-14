@@ -21,6 +21,7 @@ import java.net.URL;
 
 import io.chung.popularmovies.constants.IntentExtraKeys;
 import io.chung.popularmovies.utilities.NetworkUtils;
+import io.chung.popularmovies.utilities.TMDbException;
 import io.chung.popularmovies.utilities.TMDbUtils;
 
 public class MainActivity extends AppCompatActivity
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity
                 String response = NetworkUtils.getResponseFromUrl(url);
 
                 movieList = TMDbUtils.parseMovieListResponse(response);
-            } catch (IOException | JSONException e) {
+            } catch (IOException | JSONException | TMDbException e) {
                 e.printStackTrace();
             }
 
