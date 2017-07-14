@@ -74,7 +74,7 @@
                         <TextView
                             android:id="@+id/tv_vote_average"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -83,7 +83,7 @@
                 <TextView
                     android:id="@+id/tv_overview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
