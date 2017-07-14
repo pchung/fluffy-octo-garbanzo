@@ -1,90 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="io.chung.popularmovies.MovieDetailActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
+        android:id="@+id/sv_movie_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_movie_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="Movie Title"
-            android:textSize="32sp"
-            android:textColor="#FFFFFF"
-            android:paddingBottom="32dp"
-            android:paddingTop="32dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp" />
+        android:layout_height="match_parent"
+        android:visibility="invisible">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <TextView
+                android:id="@+id/tv_movie_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp">
+                android:background="@color/colorPrimary"
+                android:text="Movie Title"
+                android:textSize="32sp"
+                android:textColor="#FFFFFF"
+                android:paddingBottom="32dp"
+                android:paddingTop="32dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp" />
 
-                <ImageView
-                    android:id="@+id/iv_movie_poster_details"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="0"
-                    android:layout_width="192dp"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:scaleType="centerInside" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
 
-                    <TextView
-                        android:id="@+id/tv_release_year"
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_movie_poster_details"
+                        android:adjustViewBounds="true"
+                        android:layout_weight="0"
+                        android:layout_width="192dp"
                         android:layout_height="wrap_content"
-                        android:text="2017"
-                        android:textSize="24sp" />
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:scaleType="centerInside" />
 
-                    <TextView
-                        android:id="@+id/tv_runtime"
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="123min"
-                        android:textSize="16sp"
-                        android:textStyle="italic" />
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_vote_average"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="6.2/10" />
+                        <TextView
+                            android:id="@+id/tv_release_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2017"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/tv_runtime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="123min"
+                            android:textSize="16sp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:id="@+id/tv_vote_average"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6.2/10" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit finibus ligula eu posuere. Ut vel tortor eget lectus placerat vestibulum vitae vitae arcu. Curabitur malesuada justo eget ex tincidunt facilisis. Nam eu porttitor ipsum. In a massa lobortis, porttitor lacus a, mollis enim. Sed sit amet volutpat augue, eleifend egestas tellus. Maecenas nisi massa, auctor ac gravida et, auctor et augue. Duis faucibus sapien dui, ut commodo metus vulputate vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ligula nec ligula convallis, a ultrices leo ultricies. Nullam urna velit, vestibulum eget orci at, aliquet ornare velit. Suspendisse potenti. Morbi at pharetra diam, ac gravida ipsum." />
 
-            <TextView
-                android:id="@+id/tv_overview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit finibus ligula eu posuere. Ut vel tortor eget lectus placerat vestibulum vitae vitae arcu. Curabitur malesuada justo eget ex tincidunt facilisis. Nam eu porttitor ipsum. In a massa lobortis, porttitor lacus a, mollis enim. Sed sit amet volutpat augue, eleifend egestas tellus. Maecenas nisi massa, auctor ac gravida et, auctor et augue. Duis faucibus sapien dui, ut commodo metus vulputate vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ligula nec ligula convallis, a ultrices leo ultricies. Nullam urna velit, vestibulum eget orci at, aliquet ornare velit. Suspendisse potenti. Morbi at pharetra diam, ac gravida ipsum." />
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+    <TextView
+        android:id="@+id/tv_details_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/error_loading"
+        android:textSize="22sp"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/pg_details_loading_indicator"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+
+</FrameLayout>
+

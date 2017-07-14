@@ -7,7 +7,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -23,12 +27,17 @@ import io.chung.popularmovies.utilities.TMDbUtils;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
+    private ScrollView mMovieDetails;
+
     private TextView mTitle;
     private ImageView mPoster;
     private TextView mReleaseYear;
     private TextView mRuntime;
     private TextView mVoteAverage;
     private TextView mOverview;
+
+    private TextView mErrorMessageDisplay;
+    private ProgressBar mLoadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +52,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
 
         // Get references to all views in layout
+        mMovieDetails = (ScrollView) findViewById(R.id.sv_movie_details);
+
         mTitle = (TextView) findViewById(R.id.tv_movie_title);
         mPoster = (ImageView) findViewById(R.id.iv_movie_poster_details);
         mReleaseYear = (TextView) findViewById(R.id.tv_release_year);
         mRuntime = (TextView) findViewById(R.id.tv_runtime);
         mVoteAverage = (TextView) findViewById(R.id.tv_vote_average);
         mOverview = (TextView) findViewById(R.id.tv_overview);
+
+        mErrorMessageDisplay = (TextView) findViewById(R.id.tv_details_error_message);
+        mLoadingIndicator = (ProgressBar) findViewById(R.id.pg_details_loading_indicator);
 
         // Process the incoming intent
         Intent incomingIntent = getIntent();
@@ -75,8 +89,28 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Executes an asynchronous request for movie details data.
+     * @param movieId The TMDb movie ID to request.
+     */
     private void getMovieInfo(int movieId) {
         new FetchMovieListTask().execute(movieId);
+    }
+
+    /**
+     * Shows the movie list and hides and error message text view.
+     */
+    private void showMovieDetails() {
+        mErrorMessageDisplay.setVisibility(View.INVISIBLE);
+        mMovieDetails.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Shows the error message text view and hids the movie list.
+     */
+    private void showErrorMessage() {
+        mErrorMessageDisplay.setVisibility(View.VISIBLE);
+        mMovieDetails.setVisibility(View.INVISIBLE);
     }
 
     private class FetchMovieListTask extends AsyncTask<Integer, Void, TMDbMovie> {
@@ -84,7 +118,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            // TODO: Show loading indicator
+            mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -112,6 +146,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(TMDbMovie movie) {
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+
             if (movie != null) {
                 // Use Picasso to load the poster image.
                 Uri posterUri = NetworkUtils.buildPosterUri(movie.posterPath);
@@ -132,6 +168,10 @@ public class MovieDetailActivity extends AppCompatActivity {
                 // Title and overview are fine by themselves
                 mTitle.setText(movie.title);
                 mOverview.setText(movie.overview);
+
+                showMovieDetails();
+            } else {
+                showErrorMessage();
             }
         }
     }
