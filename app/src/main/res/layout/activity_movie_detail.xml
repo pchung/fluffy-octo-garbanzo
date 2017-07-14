@@ -22,7 +22,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:text="Movie Title"
                 android:textSize="32sp"
                 android:textColor="#FFFFFF"
                 android:paddingBottom="32dp"
@@ -62,14 +61,12 @@
                             android:id="@+id/tv_release_year"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2017"
                             android:textSize="24sp" />
 
                         <TextView
                             android:id="@+id/tv_runtime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="123min"
                             android:textSize="16sp"
                             android:textStyle="italic" />
 
@@ -77,7 +74,6 @@
                             android:id="@+id/tv_vote_average"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6.2/10" />
 
                     </LinearLayout>
 
@@ -87,7 +83,6 @@
                     android:id="@+id/tv_overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit finibus ligula eu posuere. Ut vel tortor eget lectus placerat vestibulum vitae vitae arcu. Curabitur malesuada justo eget ex tincidunt facilisis. Nam eu porttitor ipsum. In a massa lobortis, porttitor lacus a, mollis enim. Sed sit amet volutpat augue, eleifend egestas tellus. Maecenas nisi massa, auctor ac gravida et, auctor et augue. Duis faucibus sapien dui, ut commodo metus vulputate vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tristique ligula nec ligula convallis, a ultrices leo ultricies. Nullam urna velit, vestibulum eget orci at, aliquet ornare velit. Suspendisse potenti. Morbi at pharetra diam, ac gravida ipsum." />
 
             </LinearLayout>
 
